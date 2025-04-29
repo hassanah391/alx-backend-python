@@ -1,14 +1,15 @@
 #!/usr/bin/env python3
 """ Module 1-concurrent_coroutines """
 
-import asyncio  # Required for asynchronous programming features
+import asyncio
+from typing import List  # Required for asynchronous programming features
 
 # Dynamically import the `wait_random` coroutine from another file
 # This function sleeps for a random amount of time and returns the delay
 wait_random = __import__('0-basic_async_syntax').wait_random
 
 # Define an asynchronous function `wait_n`
-async def wait_n(n: int, max_delay: int):
+async def wait_n(n: int, max_delay: int) -> List[float]:
     """
     Spawn wait_random n times with the specified max_delay.
     Returns a list of the delays in ascending order based on completion time.
