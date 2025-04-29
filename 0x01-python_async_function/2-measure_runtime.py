@@ -8,7 +8,7 @@ import time
 wait_n = __import__('1-concurrent_coroutines').wait_n
 
 
-async def measure_time(n: int, max_delay: int) -> float:
+def measure_time(n: int, max_delay: int) -> float:
     """
     Measure the average runtime of executing wait_n.
 
@@ -20,7 +20,7 @@ async def measure_time(n: int, max_delay: int) -> float:
         float: The average runtime per coroutine.
     """
     start = time.time()
-    await wait_n(n, max_delay)
+    asyncio.run(wait_n(n, max_delay))
     end = time.time()
     elapsed = end - start
     return elapsed / n
