@@ -17,7 +17,8 @@ async def task_wait_n(n: int, max_delay: int) -> List[float]:
         max_delay (int): The maximum delay for each task.
 
     Returns:
-        List[float]: A list of delays (float values) in the order of task completion.
+        List[float]: A list of delays (float values)
+        in the order of task completion.
     """
     # Create a list of n coroutine objects (not awaited yet)
     tasks = [task_wait_random(max_delay) for _ in range(n)]
