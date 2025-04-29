@@ -8,6 +8,7 @@ from typing import List  # Required for asynchronous programming features
 # This function sleeps for a random amount of time and returns the delay
 wait_random = __import__('0-basic_async_syntax').wait_random
 
+
 # Define an asynchronous function `wait_n`
 async def wait_n(n: int, max_delay: int) -> List[float]:
     """
@@ -27,9 +28,9 @@ async def wait_n(n: int, max_delay: int) -> List[float]:
     # Initialize a list to hold the completed delay values
     delays = []
 
-    # Iterate over tasks as they complete (not in start order, but in finish order)
+    # Iterate over tasks as they complete
     for completed in asyncio.as_completed(tasks):
-        delay = await completed  # Wait for the completed task to return its delay
+        delay = await completed  # Wait for completed task to return its delay
         delays.append(delay)     # Add the result to the list
 
-    return delays  # Return the list of delays, now naturally sorted by completion time
+    return delays  # Return the list of delays
