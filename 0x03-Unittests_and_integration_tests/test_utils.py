@@ -31,21 +31,20 @@ class TestAccessNestedMap(TestCase):
 class TestGetJson(TestCase):
     """Tests for the get_json function in utils module"""
     @parameterized.expand([
-        ("example", "http://example.com", {"payload": True}),
-        ("holberton", "http://holberton.io", {"payload": False}),
+        ("http://example.com", {"payload": True}),
+        ("http://holberton.io", {"payload": False})
     ])
-    @patch('requests.get')
-    def test_get_json(self, name, test_url, test_payload, mock_get):
-        """Test get_json returns correct payload
-        without making real HTTP calls"""
-        # Configure the mock
-        mock_response = Mock()
-        mock_response.json.return_value = test_payload
-        mock_get.return_value = mock_response
+    @patch("requests.get")
+    def test_get_json(self, test_url, test_payload, mock_requests_get):
+        """
+        Test the get_json method to ensure it returns the expected output.
+        
+        Args:
+            test_url: URL to send the fake HTTP request to
+            test_payload: Expected JSON response from the mocked request
+        """
 
-        # Call the function
+        mock_requests_get.return_value.json.return_value = test_payload
         result = get_json(test_url)
-
-        # Assertions
-        mock_get.assert_called_once_with(test_url)  # Called once with test_url
-        self.assertEqual(result, test_payload)      # Output matches payload
+        self.assertEqual(result, test_payload)
+        mock_requests_get.assert_called_once_with(test_url)
