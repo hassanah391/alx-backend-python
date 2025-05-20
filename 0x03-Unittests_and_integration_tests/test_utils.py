@@ -15,3 +15,12 @@ class TestAccessNestedMap(TestCase):
     def test_access_nested_map(self, nested_map, path, expected):
         """ Test access_nested_map returns the correct value for given path"""
         return self.assertEqual(access_nested_map(nested_map, path), expected)
+
+    @parameterized.expand([
+        ({}, ['a']),
+        ({'a': 1}, ['a', 'b']),
+    ])
+    def test_access_nested_map_exception(self, nested_map, path):
+        """Test that KeyError is raised when path is invalid"""
+        with self.assertRaises(KeyError):
+            access_nested_map(nested_map, path)
