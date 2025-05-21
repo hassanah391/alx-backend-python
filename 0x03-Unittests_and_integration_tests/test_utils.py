@@ -39,7 +39,7 @@ class TestGetJson(TestCase):
     def test_get_json(self, test_url, test_payload, mock_requests_get):
         """
         Test the get_json method to ensure it returns the expected output.
-        
+
         Args:
             test_url: URL to send the fake HTTP request to
             test_payload: Expected JSON response from the mocked request
@@ -49,6 +49,7 @@ class TestGetJson(TestCase):
         result = get_json(test_url)
         self.assertEqual(result, test_payload)
         mock_requests_get.assert_called_once_with(test_url)
+
 
 class TestMemoize(TestCase):
     """Tests for the memoize function"""
@@ -62,7 +63,7 @@ class TestMemoize(TestCase):
             @memoize
             def a_property(self):
                 return self.a_method()
-        
+
         with patch.object(TestClass, 'a_method') as mock_object:
             test = TestClass()
             test.a_property()
